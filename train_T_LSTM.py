@@ -78,7 +78,13 @@ if __name__ == '__main__':
         device = torch.device("cuda:0" if torch.cuda.is_available() == True else 'cpu')
         print("available device: {}".format(device))
 
-        model = TimeLSTM(76+17, 128, cuda_flag=False, bidirectional=False)
+        if(device == 'cpu'):
+            cuda_v = False
+        else:
+            cuda_v = True
+        model = TimeLSTM(76+17, 128, cuda_flag=cuda_v, bidirectional=False)
+        
+        
         # model = TimeLSTM(76, 128, cuda_flag=False, bidirectional=False)
         optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
         linear = nn.Linear(128, 1)
@@ -158,9 +164,13 @@ if __name__ == '__main__':
         print('Constructing model ... ')
         device = torch.device("cuda:0" if torch.cuda.is_available() == True else 'cpu')
         print("available device: {}".format(device))
-
-        model = TimeLSTM(76+17, 128, cuda_flag=False, bidirectional=False)
-        # model = TimeLSTM(76, 128, cuda_flag=False, bidirectional=False)
+        
+        if(device == 'cpu'):
+            cuda_v = False
+        else:
+            cuda_v = True
+        model = TimeLSTM(76+17, 128, cuda_flag=cuda_v, bidirectional=False)
+        
         optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
         linear = nn.Linear(128, 1)      
 
