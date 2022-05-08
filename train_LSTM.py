@@ -144,9 +144,9 @@ if __name__ == '__main__':
         device = torch.device("cuda:0" if torch.cuda.is_available() == True else 'cpu')
         print("available device: {}".format(device))
 
-        model = nn.LSTM(76, 76, bias=True, batch_first=True)
+        model = nn.LSTM(76, 76, bias=True, batch_first=True).to(device)
         optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
-        linear = nn.Linear(76, 1)
+        linear = nn.Linear(76, 1).to(device)
 
         '''Train phase'''
         print('Start training ... ')
